@@ -1,4 +1,5 @@
 // external packages
+const insertst = document.getElementById('diastatus');
 const express = require('express');
 require('dotenv').config();
 
@@ -17,6 +18,7 @@ const PORT = process.env.PORT;
 // Home route
 webApp.get('/', (req, res) => {
     res.send(`Hello World.!`);
+    mongodbstatus.textContent = 'Hello world';
 });
 
 webApp.post('/webhook', (req, res) => {
