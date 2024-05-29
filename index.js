@@ -48,11 +48,8 @@ async function insert(name, email){
   
   // Call the function with name and email
   
-
-
 connectToMongoDB();
   const User = require('./models/usermodel');
-  insert("John Doe", "johndoe@example.com");
 
 // Home route
 webApp.get('/', (req, res) => {
