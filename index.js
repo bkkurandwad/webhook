@@ -26,7 +26,7 @@ webApp.post('/webhook', (req, res) => {
     console.log(JSON.stringify(req.body, 2, ' '));
 
     res.send({
-        fulfillmentText: 'Hello from the other side.'
+        fulfillmentText: 'Hello from webhook.'
 ***REMOVED***);
 });
 
