@@ -60,14 +60,14 @@ webApp.get('/', (req, res) => {
    
 });
 
-webApp.post('/webhook', (req, res) => {
+webApp.post('/webhook', async (req, res) => {
     console.log(JSON.stringify(req.body, 2, ''));
   
     const intent = req.body.queryResult.intent.displayName;
   
     switch (intent) {
       case 'calls':
-        const Message = insert("calls", "call@call.com");
+        const Message = await insert("calls", "call@call.com");
 res.send({
   fulfillmentText: Message
 });
