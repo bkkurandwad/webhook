@@ -22,7 +22,7 @@ async function connectToMongoDB() {
     await mongoose.connect("mongodb+srv://bhargavkurandwad:q2Rz53OVvSkI3WmD@cluster0.qb3qmjd.mongodb.net/DIALOGUEFLOW?retryWrites=true&w=majority&appName=Cluster",{
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        bufferTimeoutMS: 30000 // increase timeout to 30 seconds
+        socketTimeoutMS: 35000 // set socket timeout to 30 seconds
 ***REMOVED***);
     console.log('Connected to MongoDB successfully!');
     
