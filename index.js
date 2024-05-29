@@ -1,6 +1,8 @@
 // external packages
 
 const express = require('express');
+const mongoose = require('mongoose');
+
 require('dotenv').config();
 
 // Start the webapp
@@ -15,6 +17,39 @@ webApp.use(express.json());
 // Server Port
 const PORT = process.env.PORT;
 
+async function connectToMongoDB() {
+  try {
+    await mongoose.connect("mongodb+srv://bhargavkurandwad:q2Rz53OVvSkI3WmD@cluster0.qb3qmjd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster");
+    console.log('Connected to MongoDB successfully!');
+    
+  } catch (err) {
+    console.error('Error connecting to MongoDB:', err);
+    
+  }
+}
+
+async function insert(name, email){
+    try {
+      await User.create({
+        name: name,
+        email: email
+***REMOVED***);
+      console.log(`User ${name} with email ${email} inserted successfully!`);
+      return "User ${name} with email ${email} inserted successfully!";
+
+***REMOVED*** catch (err) {
+      console.error(`Error inserting user ${name} with email ${email}:`, err);
+***REMOVED***
+  }
+  
+  // Call the function with name and email
+  
+
+
+connectToMongoDB();
+  const User = require('./models/usermodel');
+  insert("John Doe", "johndoe@example.com");
+
 // Home route
 webApp.get('/', (req, res) => {
     res.send(`Hello World.!`);
@@ -28,18 +63,21 @@ webApp.post('/webhook', (req, res) => {
   
     switch (intent) {
       case 'calls':
-        res.send({
-          fulfillmentText: 'called him.'
-***REMOVED***);
+        const Message = insert("calls", "call@call.com");
+res.send({
+  fulfillmentText: Message
+});
         break;
       case 'orders':
+        const msg = insert("new order","order@mail.com");
         res.send({
-          fulfillmentText: 'Order received thank you.'
+          fulfillmentText: msg
 ***REMOVED***);
         break;
       case 'work':
+        const workmsg = insert("new work", "work@workmail.com");
         res.send({
-          fulfillmentText: 'This is ur work.'
+          fulfillmentText: workmsg
 ***REMOVED***);
         break;
       default:
@@ -53,3 +91,5 @@ webApp.post('/webhook', (req, res) => {
 webApp.listen(PORT, () => {
     console.log(`Server is up and running at ${PORT}`);
 });
+
+
