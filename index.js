@@ -1,5 +1,5 @@
 // external packages
-const insertst = document.getElementById('diastatus');
+//const insertst = document.getElementById('diastatus');
 const express = require('express');
 require('dotenv').config();
 
