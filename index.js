@@ -27,24 +27,24 @@ webApp.post('/webhook', (req, res) => {
     const intent = req.body.queryResult.intent.displayName;
   
     switch (intent) {
-      case 'webhook':
+      case 'calls':
         res.send({
-          fulfillmentText: 'Response from web.'
+          fulfillmentText: 'called him.'
 ***REMOVED***);
         break;
-      case 'intent2':
+      case 'orders':
         res.send({
-          fulfillmentText: 'Response for intent 2.'
+          fulfillmentText: 'Order received thank you.'
 ***REMOVED***);
         break;
-      case 'intent3':
+      case 'work':
         res.send({
-          fulfillmentText: 'Response for intent 3.'
+          fulfillmentText: 'This is ur work.'
 ***REMOVED***);
         break;
       default:
         res.send({
-          fulfillmentText: 'I didn\'t understand that intent.'
+          fulfillmentText: 'Simple response from webhook.'
 ***REMOVED***);
 ***REMOVED***
   });
