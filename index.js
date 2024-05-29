@@ -38,8 +38,8 @@ async function insert(name, email){
         name: name,
         email: email
 ***REMOVED***);
-      console.log(`User ${name} with email ${email} inserted successfully!`);
-      return "User ${name} with email ${email} inserted successfully!";
+      console.log('User ' + name + ' with email ' + email + ' inserted successfully!');
+      return 'User ' + name + ' with email ' + email + ' inserted successfully! ';
 
 ***REMOVED*** catch (err) {
       console.error(`Error inserting user ${name} with email ${email}:`, err);
@@ -73,13 +73,13 @@ res.send({
 });
         break;
       case 'orders':
-        const msg = insert("new order","order@mail.com");
+        const msg = await insert("new order","order@mail.com");
         res.send({
           fulfillmentText: msg
 ***REMOVED***);
         break;
       case 'work':
-        const workmsg = insert("new work", "work@workmail.com");
+        const workmsg = await insert("new work", "work@workmail.com");
         res.send({
           fulfillmentText: workmsg
 ***REMOVED***);
