@@ -2,6 +2,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const dialogflow = require('@google-cloud/dialogflow').v2beta1;
 
 require('dotenv').config();
 
@@ -43,6 +44,7 @@ async function insert(name, email){
 
 ***REMOVED*** catch (err) {
       console.error(`Error inserting user ${name} with email ${email}:`, err);
+      return 'Error inserting ' + name + ' with email ' + email + err;
 ***REMOVED***
   }
   
