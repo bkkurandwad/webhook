@@ -59,7 +59,7 @@ webApp.get('/', (req, res) => {
    
 });
 
-webApp.post('/app' , (req, res) => {
+webApp.get('/app' , (req, res) => {
   const data = 5;
   res.json(data);
 });
