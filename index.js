@@ -59,6 +59,11 @@ webApp.get('/', (req, res) => {
    
 });
 
+webApp.post('/app' , (req, res) => {
+  const data = 5;
+  res.json(data);
+});
+
 webApp.post('/webhook', async (req, res) => {
     console.log(JSON.stringify(req.body, 2, ''));
   
