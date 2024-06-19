@@ -33,11 +33,12 @@ async function connectToMongoDB() {
   }
 }
 
-async function insert(name, email){
+async function insert(id, name , dur){
     try {
       await User.create({
-        name: name,
-        email: email
+        workid: id,
+        workname: name,
+        workdurration: dur
 ***REMOVED***);
       console.log('User ' + name + ' with email ' + email + ' inserted successfully!');
       return 'User ' + name + ' with email ' + email + ' inserted successfully! ';
@@ -87,12 +88,12 @@ res.send({
           const workId = req.body.queryResult.parameters.work_id;
           const workName = req.body.queryResult.parameters.work_name;
           const workDuration = req.body.queryResult.parameters.work_duration;
-          await insert(workId, workName);
+          await insert(workId, workName, workDuration);
           // Add logic to store the work details in your database
           // e.g., database.saveWorkDetails(workId, workName, workDuration);
   
           res.json({
-              fulfillmentText: `Work ID: ${workId}, Work Name: ${workName}, Work Duration: ${workDuration} has been recorded.`
+              fulfillmentText: `Work ID: ${workId}, Work Name: ${workName}, Work Duration: ${workDuration} has been added successfully.`
   ***REMOVED***);
 ***REMOVED*** break;
       case 'work':

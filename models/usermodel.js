@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
-    name: String,
-    email: String,
+    workid: String,
+    workname: String,
+    workduration: String
 ***REMOVED***
   { collection: 'users' }
 );
