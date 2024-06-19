@@ -60,6 +60,7 @@ webApp.get('/', (req, res) => {
 });
 
 webApp.get('/app' , (req, res) => {
+  await 
   const data = 5;
   res.json(data);
 });
@@ -82,6 +83,18 @@ res.send({
           fulfillmentText: msg
 ***REMOVED***);
         break;
+        case 'AddWorkDetailsbyHR' : {
+          const workId = req.body.queryResult.parameters.work_id;
+          const workName = req.body.queryResult.parameters.work_name;
+          const workDuration = req.body.queryResult.parameters.work_duration;
+          await insert(workId, workName);
+          // Add logic to store the work details in your database
+          // e.g., database.saveWorkDetails(workId, workName, workDuration);
+  
+          res.json({
+              fulfillmentText: `Work ID: ${workId}, Work Name: ${workName}, Work Duration: ${workDuration} has been recorded.`
+  ***REMOVED***);
+***REMOVED*** break;
       case 'work':
         const workmsg = await insert("new work", "work@workmail.com");
         res.send({
