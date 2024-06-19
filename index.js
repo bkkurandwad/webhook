@@ -61,8 +61,7 @@ webApp.get('/', (req, res) => {
 });
 
 webApp.get('/app' , (req, res) => {
-  await 
-  const data = 5;
+  const data = { value: 5 };
   res.json(data);
 });
 
