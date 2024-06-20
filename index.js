@@ -65,6 +65,12 @@ webApp.get('/app' , (req, res) => {
   res.json(data);
 });
 
+webApp.get('/posttoken' , (req, res) => {
+  const token = req.body.token;
+    console.log('Received FCM token:', token);
+    res.status(200).send('FCM token received successfully');
+});
+
 webApp.post('/webhook', async (req, res) => {
     console.log(JSON.stringify(req.body, 2, ''));
   
