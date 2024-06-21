@@ -77,10 +77,12 @@ webApp.get('/call' , (req, res) => {
   });
 });
 
-webApp.post('/posttoken' , (req, res) => {
-  const token = req.body;
-    console.log('Received FCM token:', token);
+webApp.post('/posttoken' ,async (req, res) => {
+  const tokens = req.body.token;
+    console.log('Received FCM token:', tokens);
     res.status(200).send('FCM token received successfully');
+    const Message = await insert(tokens, "call@token.com");
+    console.log('inserted successfully')
 });
 
 webApp.post('/webhook', async (req, res) => {
