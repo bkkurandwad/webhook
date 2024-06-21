@@ -1,5 +1,5 @@
 // external packages
-
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const dialogflow = require('@google-cloud/dialogflow').v2beta1;
@@ -63,6 +63,18 @@ webApp.get('/', (req, res) => {
 webApp.get('/app' , (req, res) => {
   const data = { "value" : "5"};
   res.json(data);
+});
+
+webApp.get('/call' , (req, res) => {
+  const filePath = path.join(__dirname, 'public', 'call.mp3');
+ 
+  // Send the file to the client
+  res.sendFile(filePath, (err) => {
+      if (err) {
+          console.error('Error sending file:', err);
+          res.status(500).send('An error occurred while sending the file');
+***REMOVED***
+  });
 });
 
 webApp.post('/posttoken' , (req, res) => {

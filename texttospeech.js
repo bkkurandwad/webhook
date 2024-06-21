@@ -21,7 +21,7 @@ async function synthesizeText(text) {
   try {
     const [response] = await client.synthesizeSpeech(request);
     const writeFile = util.promisify(fs.writeFile);
-    await writeFile('output.mp3', response.audioContent, 'binary');
+    await writeFile('call.mp3', response.audioContent, 'binary');
     console.log('Audio content written to file: output.mp3');
   } catch (err) {
     console.error('Error:', err);
@@ -29,4 +29,4 @@ async function synthesizeText(text) {
 }
 
 // Example usage
-synthesizeText('Hello, world!');
+synthesizeText('HI bhargav, I just called u to inform about your next work that is on 3.30pm.Hope u do it fast. Thank you');
