@@ -33,19 +33,18 @@ async function connectToMongoDB() {
   }
 }
 
-async function insert(id, name , dur){
+async function insert(emailid, token){
     try {
       await User.create({
-        workid: id,
-        workname: name,
-        workdurration: dur
+        emailid: emailid,
+        tokenid: token
 ***REMOVED***);
-      console.log('User ' + name + ' with email ' + id + ' inserted successfully!');
-      return 'User ' + name + ' with email ' + id + ' inserted successfully! ';
+      console.log('User ' + emailid + ' with token ' + token + ' inserted successfully!');
+      return 'User ' + emailid + ' with token ' + token + ' inserted successfully! ';
 
 ***REMOVED*** catch (err) {
-      console.error(`Error inserting user ${name} with email ${email}:`, err);
-      return 'Error inserting ' + name + ' with email ' + email + err;
+      console.error(`Error inserting user ${emailid} with token ${token}:`, err);
+      return 'Error inserting ' + emailid + ' with token ' + token + err;
 ***REMOVED***
   }
   
@@ -81,8 +80,8 @@ webApp.post('/posttoken' ,async (req, res) => {
   const tokens = req.body.token;
     console.log('Received FCM token:', tokens);
     res.status(200).send('FCM token received successfully');
-    const Message = await insert(tokens, "call@token.com", "1");
-    console.log('inserted successfully')
+    const Message = await insert("test@token.com", tokens);
+    console.log('inserted successfully');
 });
 
 webApp.post('/webhook', async (req, res) => {
