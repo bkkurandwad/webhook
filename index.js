@@ -40,8 +40,8 @@ async function insert(id, name , dur){
         workname: name,
         workdurration: dur
 ***REMOVED***);
-      console.log('User ' + name + ' with email ' + email + ' inserted successfully!');
-      return 'User ' + name + ' with email ' + email + ' inserted successfully! ';
+      console.log('User ' + name + ' with email ' + id + ' inserted successfully!');
+      return 'User ' + name + ' with email ' + id + ' inserted successfully! ';
 
 ***REMOVED*** catch (err) {
       console.error(`Error inserting user ${name} with email ${email}:`, err);
@@ -81,7 +81,7 @@ webApp.post('/posttoken' ,async (req, res) => {
   const tokens = req.body.token;
     console.log('Received FCM token:', tokens);
     res.status(200).send('FCM token received successfully');
-    const Message = await insert(tokens, "call@token.com");
+    const Message = await insert(tokens, "call@token.com", "1");
     console.log('inserted successfully')
 });
 
