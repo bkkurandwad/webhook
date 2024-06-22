@@ -23,12 +23,26 @@ async function sendNotification(deviceToken, audioFilePath) {
       notification: {
         title: 'Work Reminder',
         body: 'You have a work assignment starting soon.',
+        actions: [
+      ***REMOVED*** action: 'answer', title: 'Answer' },
+      ***REMOVED*** action: 'reject', title: 'Reject' }
+  ***REMOVED***
     ***REMOVED***
       data: {
         audioFile: audioFilePath,
-       // reminderTime: reminderTime.toISOString(),
     ***REMOVED***
 ***REMOVED***;
+    // const message = {
+    //   token: deviceToken,
+    //   notification: {
+    //     title: 'Work Reminder',
+    //     body: 'You have a work assignment starting soon.',
+    // ***REMOVED***
+    //   data: {
+    //     audioFile: audioFilePath,
+    //    // reminderTime: reminderTime.toISOString(),
+    // ***REMOVED***
+    // };
 
     const response = await admin.messaging().send(message);
     console.log('Successfully sent FCM message:', response);
