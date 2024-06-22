@@ -59,4 +59,27 @@ router.post('/log', async (req, res) => {
   }
 });
 
+router.post('/tok', async (req, res) => {
+try {
+  const { id, token } = req.body;
+
+  // Find employee by id and update token
+  const updatedEmployee = await EmployeeDetails.findOneAndUpdate(
+***REMOVED*** emp_id: id },
+***REMOVED*** emp_token: token },
+***REMOVED*** new: true }
+  );
+
+  if (!updatedEmployee) {
+    return res.status(404).json({ error: 'Employee not found' });
+  }
+
+  res.status(200).json(updatedEmployee);
+} catch (error) {
+  res.status(500).json({ error: error.message });
+}
+
+});
+
+
 module.exports = router;

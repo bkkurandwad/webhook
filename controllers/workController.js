@@ -1,54 +1,132 @@
+// controllers/workController.js
+const express = require('express');
+
+//db
+const Emp = require('../models/userdetails')
+const Work = require('../models/workdetails');
+
 const { calculateReminderTime } = require('../utils/dateUtils');
-const Work = require('../models/workdetails')
+
+//services
 const { generateAudioFromText } = require('../services/textToSpeechService');
 const { sendNotification } = require('../services/fcmService');
 
-// Function to register a new work assignment
-async function registerWork(req, res) {
+const router = express.Router();
+
+router.post('/reg', async (req, res) => {
+  const eid = req.body.assigned_to;
+  const wt = req.body.work_title;
+  const st = req.body.start_time;
   try {
     const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = req.body;
-
-    // Convert start_time to Date object
+    
     const startTime = new Date(start_time);
 
-    // Create a new work detail
     const workDetails = new Work({
       work_id,
       work_title,
       work_description,
       assigned_to,
       assigned_by,
-      start_time: startTime, // Store startTime as a Date object
+      start_time: startTime,
       end_time,
       due_date
 ***REMOVED***);
-
-    // Save the work details to the database
     const savedWork = await workDetails.save();
-
-    // Calculate reminder time 30 minutes before start_time
-    const reminderTime = calculateReminderTime(startTime);
-
-    // Generate audio from text message
-    const reminderMessage = `You have a work assignment "${work_title}" starting in 30 minutes. Please be prepared.`;
-    const audioFilePath = await generateAudioFromText(reminderMessage);
-
-    // Schedule the notification using a task scheduler (e.g., setTimeout)
-    const currentTime = new Date();
-    const timeToNotify = reminderTime - currentTime.getTime(); // Time in milliseconds until reminderTime
-
-    setTimeout(async () => {
-      // Send notification using FCM
-      await sendNotification(assigned_to, audioFilePath, reminderTime);
-  ***REMOVED*** timeToNotify);
-
     res.status(201).json(savedWork);
   } catch (error) {
     console.error('Error registering work:', error);
     res.status(500).json({ error: error.message });
   }
+
+    notify(eid,wt,st);
+    
+
+    
+});
+
+async function notify(assigned_to,work_title,startTime) {
+  //const reminderTime = calculateReminderTime(startTime);
+// Fetch token from database using assigned_to (emp_id)
+const employee = await Emp.findOne({ emp_id: assigned_to });
+
+if (!employee) {
+  throw new Error('Employee not found');
 }
 
-module.exports = {
-  registerWork,
-};
+    const token = employee.emp_token; // Assuming emp_token is the field in your model
+    const reminderMessage = `You have a work assignment "${work_title}" starting in 30 minutes. Please be prepared.`;
+    const audioFilePath = await generateAudioFromText(reminderMessage);
+    await sendNotification(token, audioFilePath);
+    
+    // const currentTime = new Date();
+    // const timeToNotify = reminderTime - currentTime.getTime();
+    // console.log(timeToNotify);
+
+    // setTimeout(async () => {
+    //   await sendNotification(token, audioFilePath, reminderTime);
+    // }, timeToNotify);
+}
+
+module.exports = router;
+
+
+// const express = require('express');
+// const router = express.Router();
+
+// const { calculateReminderTime } = require('../utils/dateUtils');
+// const Work = require('../models/workdetails');
+// const { generateAudioFromText } = require('../services/textToSpeechService');
+// const { sendNotification } = require('../services/fcmService');
+
+// // Function to register a new work assignment
+// router.post('/tok', async (req, res) => {
+//   try {
+//     const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = req.body;
+
+//     // Convert start_time to Date object
+//     const startTime = new Date(start_time);
+
+//     // Create a new work detail
+//     const workDetails = new Work({
+//       work_id,
+//       work_title,
+//       work_description,
+//       assigned_to,
+//       assigned_by,
+//       start_time: startTime, // Store startTime as a Date object
+//       end_time,
+//       due_date
+// ***REMOVED***);
+
+//     // Save the work details to the database
+//     const savedWork = await workDetails.save();
+
+//     // Calculate reminder time 30 minutes before start_time
+//     const reminderTime = calculateReminderTime(startTime);
+
+//     // Generate audio from text message
+//     const reminderMessage = `You have a work assignment "${work_title}" starting in 30 minutes. Please be prepared.`;
+//     const audioFilePath = await generateAudioFromText(reminderMessage);
+
+//     // Schedule the notification using a task scheduler (e.g., setTimeout)
+//     const currentTime = new Date();
+//     const timeToNotify = reminderTime - currentTime.getTime(); // Time in milliseconds until reminderTime
+
+//     setTimeout(async () => {
+//       // Send notification using FCM
+//       await sendNotification(assigned_to, audioFilePath, reminderTime);
+//   ***REMOVED*** timeToNotify);
+
+//     res.status(201).json(savedWork);
+//   } catch (error) {
+//     console.error('Error registering work:', error);
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
+// module.exports = router;
+
+// module.exports = {
+//   registerWork,
+// };

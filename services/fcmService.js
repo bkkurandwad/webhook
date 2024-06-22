@@ -16,7 +16,7 @@ admin.initializeApp({
 });
 
 // Function to send FCM notification to a device
-async function sendNotification(deviceToken, audioFilePath, reminderTime) {
+async function sendNotification(deviceToken, audioFilePath) {
   try {
     const message = {
       token: deviceToken,
@@ -26,7 +26,7 @@ async function sendNotification(deviceToken, audioFilePath, reminderTime) {
     ***REMOVED***
       data: {
         audioFile: audioFilePath,
-        reminderTime: reminderTime.toISOString(),
+       // reminderTime: reminderTime.toISOString(),
     ***REMOVED***
 ***REMOVED***;
 

@@ -4,7 +4,7 @@ const express = require('express');
 
 // internal packages
 const bodyParser = require('body-parser'); // Middleware to parse incoming request bodies
-const workController = require('./controllers/workController');
+//const workController = require('./controllers/workController');
 const controllers = require('./controllers');
 const connectToMongoDB = require('./config/database');
 
@@ -38,7 +38,7 @@ webApp.get('/', (req, res) => {
    
 });
 
-webApp.post('/regwork', workController.registerWork);
+//webApp.post('/regwork', workController.registerWork);
 
 webApp.get('/app' , (req, res) => {
   const data = { "value" : "5"};
@@ -74,7 +74,8 @@ async function insert(emailid, token){
 
 webApp.post('/posttoken' ,async (req, res) => {
   const tokens = req.body.token;
-    console.log('Received FCM token:', tokens);
+  const id1 = req.body.id;
+    console.log('Received FCM token and id:', tokens, id1 );
     res.status(200).send('FCM token received successfully');
     const Message = await insert("test@token.com", tokens);
     console.log('inserted successfully');
