@@ -1,0 +1,46 @@
+project/
+│
+├── controllers/
+│   ├── workController.js    <-- Central controller for work-related functions
+│   ├── registerWork.js      <-- Function to register new work
+│   ├── handleReminder.js    <-- Function to handle reminders and notifications
+│   └── index.js             <-- Main entry point for controllers
+│
+├── models/
+│   └── workdetails.js       <-- Model schema for work details
+│
+├── services/
+│   ├── textToSpeechService.js  <-- Service for text to speech functionality
+│   └── fcmService.js        <-- Service for Firebase Cloud Messaging (FCM)
+│
+├── utils/
+│   └── dateUtils.js         <-- Utility functions for date operations
+│
+└── index.js                 <-- Main entry point for Express.js application
+
+
+project-root/
+│
+├── index.js                 // Main entry point of your application
+│
+├── controllers/             // Controllers handling business logic
+│   ├── workController.js    // Controller for work related operations
+│   ├── userController.js    // Controller for user related operations
+│   └── hrController.js      // Controller for HR related operations
+│
+├── models/                  // Mongoose models (already settled up)
+│   ├── Work.js              // Mongoose model for Work
+│   ├── User.js              // Mongoose model for User
+│   └── Hr.js                // Mongoose model for HR
+│
+├── services/                // Services layer for external services (APIs)
+│   ├── textToSpeechService.js // Service for Text-to-Speech API
+│   └── fcmService.js        // Service for Firebase Cloud Messaging (FCM)
+│
+├── utils/                   // Utility functions
+│   ├── dateUtils.js         // Utility functions for date manipulation
+│   └── validationUtils.js   // Utility functions for input validation
+│
+└── config/                  // Configuration files (if applicable)
+    ├── database.js          // Database connection setup
+    └── fcmConfig.js         // FCM configuration (if needed)

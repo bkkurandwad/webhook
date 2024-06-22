@@ -31,7 +31,7 @@ async function sendNotificationToToken(title, body, token) {
 
 const title = 'Just a remainder call BHARGAV';
 const body = 'Go do SLEEP NOW.';
-const token = 'fUmJJeTZQMqMo5Lh7x1uWR:APA91bGn3Gr_6Bp4tE29ZnXgxGKid0JFEpEnAYBHp5QCub4LXtDuN-6dePScqZu2Ws4BMcmiqrBeEbZ_Lon5WP9gCQDUK7Haa0tua3BEfw3MgZLyTb8wckVP8oJJxfG-Hej5sqDkULkz'; // The FCM token of the device you want to send the notification to
+const token = 'cvREsbRfQBC5AVuUlY_7AU:APA91bEkF_BwMB-GVou9Nd42SlMWDOhU5jyd3i4Wqcs1nxAyjA7j2UMs4Usj9-QrOK0olJWmWyvi73KltX29zrzAVQ-2sC4EfLSon3wP3LCWJZ4lQ4vw0w8Sr12A4JMbXPe2jXAVybro'; // The FCM token of the device you want to send the notification to
 
 sendNotificationToToken(title, body, token)
     .then(response => {
