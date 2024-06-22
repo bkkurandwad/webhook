@@ -1,8 +1,13 @@
 const admin = require('firebase-admin');
+const path = require('path');
+
+require('dotenv').config();
+
+process.env.GOOGLE_APPLICATION_CREDENTIALS = path.resolve(__dirname, '../dialogue-a08df-33ec38611656.json');
 
 console.log('GOOGLE_APPLICATION_CREDENTIALS:', process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
-require('dotenv').config();
+
 
 // Initialize Firebase Admin SDK with your service account credentials
 //const serviceAccount = require('C:\Users\bharg\OneDrive\Desktop\6th sem\BACKEND\WEBHOOK\dialogue-a08df-33ec38611656.json'); // Path to your Firebase service account key

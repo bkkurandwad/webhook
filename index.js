@@ -4,12 +4,12 @@ const express = require('express');
 
 // internal packages
 const bodyParser = require('body-parser'); // Middleware to parse incoming request bodies
-const workController = require('../controllers/workController');
-const controllers = require('../controllers');
-const connectToMongoDB = require('../config/database');
+const workController = require('./controllers/workController');
+const controllers = require('./controllers');
+const connectToMongoDB = require('./config/database');
 
 // TESTING
-const User = require('../models/usermodel');
+const User = require('./models/usermodel');
 
 require('dotenv').config();
 
