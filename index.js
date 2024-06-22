@@ -75,9 +75,9 @@ async function insert(emailid, token){
 webApp.post('/posttoken' ,async (req, res) => {
   const tokens = req.body.token;
   const id1 = req.body.id;
-    console.log('Received FCM token and id:', tokens, id1 );
-    res.status(200).send('FCM token received successfully');
-    const Message = await insert("test@token.com", tokens);
+    console.log('Received FCM token and id:', id1 );
+   // res.status(200).send('FCM token received successfully');
+   // const Message = await insert("test@token.com", tokens);
     console.log('inserted successfully');
 });
 
