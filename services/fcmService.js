@@ -25,11 +25,7 @@ async function sendNotification(deviceToken) {
         body: 'You have a work assignment starting soon.',
         
     ***REMOVED***
-      data: {
-        audioFile: "retrive audio from server",
-    ***REMOVED***
 ***REMOVED***;
-
     const response = await admin.messaging().send(message);
     console.log('Successfully sent FCM message:', response);
   } catch (error) {
