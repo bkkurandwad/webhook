@@ -21,12 +21,15 @@ async function synthesizeText(text) {
   try {
     const [response] = await client.synthesizeSpeech(request);
     const writeFile = util.promisify(fs.writeFile);
-    await writeFile('call.mp3', response.audioContent, 'binary');
-    console.log('Audio content written to file: output.mp3');
+    const filePath = 'call2.mp3';
+    await writeFile(filePath, response.audioContent, 'binary');
+    //const base64String = audioFile.toString('base64');
+    console.log(`Audio content written to file: ${filePath}`);
   } catch (err) {
     console.error('Error:', err);
   }
 }
 
 // Example usage
-synthesizeText('HI bhargav, I just called u to inform about your next work that is on 3.30pm.Hope u do it fast. Thank you');
+//synthesizeText('HI bhargav,do it fast . Thank you');
+//I just called u to inform about your next work that is on 3.30pm.Hope u do it fast

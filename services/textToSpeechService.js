@@ -24,11 +24,13 @@ async function generateAudioFromText(text) {
    
 try {
   const [res] = await client.synthesizeSpeech(requestBody);
-    const audioFilePath = 'file.mp3'; // Specify your file path to save audio
+    const audioFilePath = 'call2.mp3'; // Specify your file path to save audio
     const writeFile = util.promisify(fs.writeFile);
          await writeFile(audioFilePath, res.audioContent, 'binary');
-         console.log('Audio content written to file: output.mp3');
-    return audioFilePath;
+         //const base64String = Buffer.from(res.audioContent, 'binary').toString('base64');
+        console.log(`music generated : ${audioFilePath}`);
+    return  audioFilePath;
+    //audioFilePath,
   } catch (error) {
     console.error('Error generating audio:', error);
     throw error;

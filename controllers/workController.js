@@ -39,13 +39,13 @@ router.post('/reg', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 
-    notify(eid,wt,st);
+    notify(eid,wt);
     
 
     
 });
 
-async function notify(assigned_to,work_title,startTime) {
+async function notify(assigned_to,work_title) {
   //const reminderTime = calculateReminderTime(startTime);
 // Fetch token from database using assigned_to (emp_id)
 const employee = await Emp.findOne({ emp_id: assigned_to });
@@ -55,14 +55,14 @@ if (!employee) {
 }
 
     const token = employee.emp_token; // Assuming emp_token is the field in your model
-    const reminderMessage = `You have a work assignment "${work_title}" starting in 30 minutes. Please be prepared.`;
-    const audioFilePath = await generateAudioFromText(reminderMessage);
-    await sendNotification(token, audioFilePath);
+    const reminderMessage = ` "${work_title}" starting in 30 minutes. Please be prepared.`;
+    const  base64String = await generateAudioFromText(reminderMessage);
+    await sendNotification(token, base64String);
     
     // const currentTime = new Date();
     // const timeToNotify = reminderTime - currentTime.getTime();
     // console.log(timeToNotify);
-
+//audioFilePath,
     // setTimeout(async () => {
     //   await sendNotification(token, audioFilePath, reminderTime);
     // }, timeToNotify);
