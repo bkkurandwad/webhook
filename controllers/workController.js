@@ -56,16 +56,10 @@ if (!employee) {
 
     const token = employee.emp_token; // Assuming emp_token is the field in your model
     const reminderMessage = ` "${work_title}" starting in 30 minutes. Please be prepared.`;
-    const  base64String = await generateAudioFromText(reminderMessage);
-    await sendNotification(token, base64String);
+   // const  base64String = await generateAudioFromText(reminderMessage);
+    await sendNotification(token);
     
-    // const currentTime = new Date();
-    // const timeToNotify = reminderTime - currentTime.getTime();
-    // console.log(timeToNotify);
-//audioFilePath,
-    // setTimeout(async () => {
-    //   await sendNotification(token, audioFilePath, reminderTime);
-    // }, timeToNotify);
+   
 }
 
 module.exports = router;

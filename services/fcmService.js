@@ -16,33 +16,19 @@ admin.initializeApp({
 });
 
 // Function to send FCM notification to a device
-async function sendNotification(deviceToken, base64mp3) {
+async function sendNotification(deviceToken) {
   try {
     const message = {
       token: deviceToken,
       notification: {
         title: 'Work Reminder',
         body: 'You have a work assignment starting soon.',
-        // actions: [
-        //   { action: 'answer', title: 'Answer' },
-        //   { action: 'reject', title: 'Reject' }
-        // ],
+        
     ***REMOVED***
       data: {
         audioFile: "retrive audio from server",
     ***REMOVED***
 ***REMOVED***;
-    // const message = {
-    //   token: deviceToken,
-    //   notification: {
-    //     title: 'Work Reminder',
-    //     body: 'You have a work assignment starting soon.',
-    // ***REMOVED***
-    //   data: {
-    //     audioFile: audioFilePath,
-    //    // reminderTime: reminderTime.toISOString(),
-    // ***REMOVED***
-    // };
 
     const response = await admin.messaging().send(message);
     console.log('Successfully sent FCM message:', response);
