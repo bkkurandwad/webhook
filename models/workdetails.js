@@ -8,8 +8,8 @@ const WorkSchema = new mongoose.Schema(
     work_description: String,
     assigned_to: String, // Employee ID or name
     assigned_by: String, // HR ID or name
-    start_time: Date,
-    end_time: Date,
+    start_time: String,
+    end_time: String,
     due_date: Date,
     status: { type: String, default: 'pending' }
 ***REMOVED***
