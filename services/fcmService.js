@@ -7,23 +7,18 @@ process.env.GOOGLE_APPLICATION_CREDENTIALS = path.resolve(__dirname, '../dialogu
 
 console.log('GOOGLE_APPLICATION_CREDENTIALS:', process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
-
-
-// Initialize Firebase Admin SDK with your service account credentials
-//const serviceAccount = require('C:\Users\bharg\OneDrive\Desktop\6th sem\BACKEND\WEBHOOK\dialogue-a08df-33ec38611656.json'); // Path to your Firebase service account key
 admin.initializeApp({
  /// credential: admin.credential.cert(serviceAccount),
 });
 
 // Function to send FCM notification to a device
-async function sendNotification(deviceToken) {
+async function sendNotification(deviceToken, Title, body) {
   try {
     const message = {
       token: deviceToken,
       notification: {
-        title: 'Work Reminder',
-        body: 'You have a work assignment starting soon.',
-        
+        title: Title,
+        body: body
     ***REMOVED***
 ***REMOVED***;
     const response = await admin.messaging().send(message);
@@ -38,35 +33,6 @@ module.exports = {
   sendNotification,
 };
 
-// console.log('GOOGLE_APPLICATION_CREDENTIALS:', process.env.GOOGLE_APPLICATION_CREDENTIALS);
-
-// require('dotenv').config();
-
-//const admin = require('firebase-admin');
-//const serviceAccount = require('C:\Users\bharg\OneDrive\Desktop\6th sem\BACKEND\WEBHOOK\dialogue-a08df-33ec38611656.json'); // Path to your service account key file
-
-// admin.initializeApp({
-//  /// credential: admin.credential.cert(serviceAccount)
-// });
-
-// async function sendNotificationToToken(title, body, token) {
-//     const message = {
-//         notification: {
-//             title: title,
-//             body: body
-//       ***REMOVED***
-//         token: token
-// ***REMOVED***;
-
-//     try {
-//         const response = await admin.messaging().send(message);
-//         console.log('Successfully sent message:', response);
-//         return response;
-// ***REMOVED*** catch (error) {
-//         console.error('Error sending message:', error);
-//         throw error;
-// ***REMOVED***
-// }
 
 
 // const title = 'Just a remainder call BHARGAV';
