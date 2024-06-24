@@ -39,13 +39,13 @@ router.post('/reg', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 
-    notify(eid,wt);
+    notify_for_work(eid,wt);
     
 
     
 });
 
-async function notify(assigned_to,work_title) {
+async function notify_for_work(assigned_to,work_title) {
   //const reminderTime = calculateReminderTime(startTime);
 // Fetch token from database using assigned_to (emp_id)
 const employee = await Emp.findOne({ emp_id: assigned_to });
@@ -56,10 +56,25 @@ if (!employee) {
 
     const token = employee.emp_token; // Assuming emp_token is the field in your model
     const reminderMessage = ` "${work_title}" starting in 30 minutes. Please be prepared.`;
-   // const  base64String = await generateAudioFromText(reminderMessage);
+   const  base64String = await generateAudioFromText(reminderMessage);
     await sendNotification(token);
     
    
+}
+
+async function notify_for_announcements(work_title, work_msg, hr_name) {
+  //const reminderTime = calculateReminderTime(startTime);
+// Fetch token from database using assigned_to (emp_id)
+const employee = await Emp.findOne({ emp_id: assigned_to });
+
+if (!employee) {
+  throw new Error('Employee not found');
+}
+
+    const token = employee.emp_token; // Assuming emp_token is the field in your model
+    const reminderMessage = ` "${work_title}" is announced by "${hr_name}". Please be prepared for doing the work.${work_msg} `;
+   const  base64String = await generateAudioFromText(reminderMessage);
+    await sendNotification(token);
 }
 
 module.exports = router;

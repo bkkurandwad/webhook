@@ -61,11 +61,11 @@ router.post('/log', async (req, res) => {
 
 router.post('/tok', async (req, res) => {
 try {
-  const { id, token } = req.body;
+  const { email, token } = req.body;
 
   // Find employee by id and update token
   const updatedEmployee = await EmployeeDetails.findOneAndUpdate(
-***REMOVED*** emp_id: id },
+***REMOVED*** emp_emailid: email },
 ***REMOVED*** emp_token: token },
 ***REMOVED*** new: true }
   );
