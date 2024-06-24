@@ -76,6 +76,7 @@ try {
   }
 
   res.status(200).json(updatedEmployee);
+  console.log(updatedEmployee);
   console.log('updated');
 } catch (error) {
   res.status(500).json({ error: error.message });
