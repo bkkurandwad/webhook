@@ -54,6 +54,9 @@ webApp.get('/call' , (req, res) => {
           console.error('Error sending file:', err);
           res.status(500).send('An error occurred while sending the file');
 ***REMOVED***
+      else{
+        console.log('File sent successfully');
+***REMOVED***
   });
 });
 

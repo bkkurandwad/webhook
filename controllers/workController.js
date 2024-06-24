@@ -55,8 +55,9 @@ if (!employee) {
 }
 
     const token = employee.emp_token; // Assuming emp_token is the field in your model
+    const name = employee.emp_name;
     console.log(token);
-    const reminderMessage = ` "${work_title}" starting in 30 minutes. Please be prepared.`;
+    const reminderMessage = `Hi ${name}, I just called you to inform about the work "${work_title}" starting in 30 minutes. ${msg}. Please be prepared.`;
    const  audioC = await generateAudioFromText(reminderMessage);
     await sendNotification(token, work_title, msg);
     
