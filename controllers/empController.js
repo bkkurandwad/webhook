@@ -71,6 +71,7 @@ try {
   );
 
   if (!updatedEmployee) {
+    console.log('not found');
     return res.status(404).json({ error: 'Employee not found' });
   }
 
