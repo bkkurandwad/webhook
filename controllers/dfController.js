@@ -67,7 +67,7 @@ res.send({
           // e.g., database.saveWorkDetails(workId, workName, workDuration);
   
           res.json({
-              fulfillmentText: `Work ID: ${workId}, Work Name: ${workName}, Work Duration: ${workDuration} has been added successfully.`
+              fulfillmentText: `Work Title: ${work_title} has been added successfully.`
   ***REMOVED***);
 ***REMOVED*** break;
       case 'work':
