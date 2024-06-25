@@ -59,7 +59,7 @@ res.send({
           const end_time = req.body.queryResult.parameters.et;
           const due_date = req.body.queryResult.parameters.due_date;
           const data = {work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date};
-          registerworkk(data);
+          registerwork(data);
           
          // await insert(workId, workName, workDuration);
           // Add logic to store the work details in your database
