@@ -24,10 +24,10 @@ async function registerwork(data){
           due_date
 ***REMOVED***);
         const savedWork = await workDetails.save();
-        const some = json(savedWork);
+        const some = savedWork;
 ***REMOVED*** catch (error) {
         console.error('Error registering work:', error);
-        const some = json({ error: error.message });
+        const some =  error.message;
 ***REMOVED***
       return some;
 }
