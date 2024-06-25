@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser'); // Middleware to parse incoming request bodies
 //const workController = require('./controllers/workController');
 const controllers = require('./controllers');
+import { registerWorkDetails } from './controllers/workController';
 const connectToMongoDB = require('./config/database');
 
 // TESTING
@@ -102,10 +103,18 @@ res.send({
 ***REMOVED***);
         break;
         case 'AddWorkDetailsbyHR' : {
-          const workId = req.body.queryResult.parameters.work_id;
-          const workName = req.body.queryResult.parameters.work_name;
-          const workDuration = req.body.queryResult.parameters.work_duration;
-          await insert(workId, workName, workDuration);
+          const work_id = req.body.queryResult.parameters.work_id;
+          const work_title = req.body.queryResult.parameters.work_title;
+          const work_description = req.body.queryResult.parameters.work_des;
+          const assigned_to = req.body.queryResult.parameters.emp_id;
+          const assigned_by = req.body.queryResult.parameters.hr_id;
+          const start_time = req.body.queryResult.parameters.st;
+          const end_time = req.body.queryResult.parameters.et;
+          const due_date = req.body.queryResult.parameters.due_date;
+          const data = {work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date};
+          registerWorkDetails(data);
+          
+         // await insert(workId, workName, workDuration);
           // Add logic to store the work details in your database
           // e.g., database.saveWorkDetails(workId, workName, workDuration);
   
