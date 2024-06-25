@@ -10,7 +10,7 @@ const router = express.Router();
 async function registerwork(data){
     try {
         const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = data;
-        
+         
         const startTime = new Date(start_time);
     
         const workDetails = new Work({
@@ -24,12 +24,12 @@ async function registerwork(data){
           due_date
 ***REMOVED***);
         const savedWork = await workDetails.save();
-        const some = savedWork;
+        return savedWork;
 ***REMOVED*** catch (error) {
         console.error('Error registering work:', error);
-        const some =  error.message;
+        return error.message;
 ***REMOVED***
-      return some;
+      
 }
 
 router.post('/webhook', async (req, res) => {
