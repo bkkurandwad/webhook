@@ -60,34 +60,10 @@ if (!employee) {
     const reminderMessage = `Hi ${name}, I just called you to inform about the work "${work_title}" starting in 30 minutes. ${msg}. Please be prepared.`;
    const  audioC = await generateAudioFromText(reminderMessage);
     await sendNotification(token, work_title, msg);
-    
-   
 }
 
-async function registerWorkDetails(data) {
-  // Your logic to register the work details goes here
-  // For example, saving to the database
-  const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = data.body;
-  try{
-  const workDetails = new Work({
-    work_id,
-    work_title,
-    work_description,
-    assigned_to,
-    assigned_by,
-    start_time: startTime,
-    end_time,
-    due_date
-  });
-  const savedWork = await workDetails.save();
-  res.status(201).json(savedWork);
-  console.log('added work from dialogueflow')
-}
- catch (error) {
-  console.error('Error registering work:', error);
-  res.status(500).json({ error: error.message });
-}
-}
+
+
 
 async function notify_for_announcements(work_title, work_msg, hr_name) {
   //const reminderTime = calculateReminderTime(startTime);
@@ -104,7 +80,7 @@ if (!employee) {
     await sendNotification(token);
 }
 
-module.exports = { router, registerWorkDetails };
+module.exports = router;
 
 
 // const express = require('express');
