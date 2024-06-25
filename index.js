@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser'); // Middleware to parse incoming request bodies
 //const workController = require('./controllers/workController');
 const controllers = require('./controllers');
-import { registerWorkDetails } from './controllers/workController';
+
 const connectToMongoDB = require('./config/database');
 
 // TESTING
@@ -84,56 +84,56 @@ webApp.post('/posttoken' ,async (req, res) => {
     console.log('inserted successfully');
 });
 
-webApp.post('/webhook', async (req, res) => {
-    console.log(JSON.stringify(req.body, 2, ''));
+// webApp.post('/webhook', async (req, res) => {
+//     console.log(JSON.stringify(req.body, 2, ''));
   
-    const intent = req.body.queryResult.intent.displayName;
+//     const intent = req.body.queryResult.intent.displayName;
   
-    switch (intent) {
-      case 'calls':
-        const Message = await insert("calls", "call@call.com");
-res.send({
-  fulfillmentText: Message
-});
-        break;
-      case 'orders':
-        const msg = await insert("new order","order@mail.com");
-        res.send({
-          fulfillmentText: msg
-***REMOVED***);
-        break;
-        case 'AddWorkDetailsbyHR' : {
-          const work_id = req.body.queryResult.parameters.work_id;
-          const work_title = req.body.queryResult.parameters.work_title;
-          const work_description = req.body.queryResult.parameters.work_des;
-          const assigned_to = req.body.queryResult.parameters.emp_id;
-          const assigned_by = req.body.queryResult.parameters.hr_id;
-          const start_time = req.body.queryResult.parameters.st;
-          const end_time = req.body.queryResult.parameters.et;
-          const due_date = req.body.queryResult.parameters.due_date;
-          const data = {work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date};
-          registerWorkDetails(data);
+//     switch (intent) {
+//       case 'calls':
+//         const Message = await insert("calls", "call@call.com");
+// res.send({
+//   fulfillmentText: Message
+// });
+//         break;
+//       case 'orders':
+//         const msg = await insert("new order","order@mail.com");
+//         res.send({
+//           fulfillmentText: msg
+// ***REMOVED***);
+//         break;
+//         case 'AddWorkDetailsbyHR' : {
+//           const work_id = req.body.queryResult.parameters.work_id;
+//           const work_title = req.body.queryResult.parameters.work_title;
+//           const work_description = req.body.queryResult.parameters.work_des;
+//           const assigned_to = req.body.queryResult.parameters.emp_id;
+//           const assigned_by = req.body.queryResult.parameters.hr_id;
+//           const start_time = req.body.queryResult.parameters.st;
+//           const end_time = req.body.queryResult.parameters.et;
+//           const due_date = req.body.queryResult.parameters.due_date;
+//           const data = {work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date};
+//           registerWorkDetails(data);
           
-         // await insert(workId, workName, workDuration);
-          // Add logic to store the work details in your database
-          // e.g., database.saveWorkDetails(workId, workName, workDuration);
+//          // await insert(workId, workName, workDuration);
+//           // Add logic to store the work details in your database
+//           // e.g., database.saveWorkDetails(workId, workName, workDuration);
   
-          res.json({
-              fulfillmentText: `Work ID: ${workId}, Work Name: ${workName}, Work Duration: ${workDuration} has been added successfully.`
-  ***REMOVED***);
-***REMOVED*** break;
-      case 'work':
-        const workmsg = await insert("new work", "work@workmail.com");
-        res.send({
-          fulfillmentText: workmsg
-***REMOVED***);
-        break;
-      default:
-        res.send({
-          fulfillmentText: 'Simple response from webhook.'
-***REMOVED***);
-***REMOVED***
-  });
+//           res.json({
+//               fulfillmentText: `Work ID: ${workId}, Work Name: ${workName}, Work Duration: ${workDuration} has been added successfully.`
+//   ***REMOVED***);
+// ***REMOVED*** break;
+//       case 'work':
+//         const workmsg = await insert("new work", "work@workmail.com");
+//         res.send({
+//           fulfillmentText: workmsg
+// ***REMOVED***);
+//         break;
+//       default:
+//         res.send({
+//           fulfillmentText: 'Simple response from webhook.'
+// ***REMOVED***);
+// ***REMOVED***
+//   });
 
 // Start the server
 webApp.listen(PORT, () => {

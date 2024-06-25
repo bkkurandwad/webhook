@@ -67,7 +67,7 @@ if (!employee) {
 async function registerWorkDetails(data) {
   // Your logic to register the work details goes here
   // For example, saving to the database
-  const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = req.body;
+  const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = data.body;
   try{
   const workDetails = new Work({
     work_id,
