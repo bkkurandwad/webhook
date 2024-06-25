@@ -9,7 +9,7 @@ const router = express.Router();
 
 async function registerwork(data){
     try {
-        const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = data.body;
+        const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = data;
         
         const startTime = new Date(start_time);
     
@@ -24,11 +24,12 @@ async function registerwork(data){
           due_date
 ***REMOVED***);
         const savedWork = await workDetails.save();
-        res.status(201).json(savedWork);
+        const some = json(savedWork);
 ***REMOVED*** catch (error) {
         console.error('Error registering work:', error);
-        res.status(500).json({ error: error.message });
+        const some = json({ error: error.message });
 ***REMOVED***
+      return some;
 }
 
 router.post('/webhook', async (req, res) => {
@@ -59,8 +60,8 @@ res.send({
           const end_time = req.body.queryResult.parameters.et;
           const due_date = req.body.queryResult.parameters.due_date;
           const data = {work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date};
-          registerwork(data);
-          
+          const status = await registerwork(data);
+          console.log(status);
          // await insert(workId, workName, workDuration);
           // Add logic to store the work details in your database
           // e.g., database.saveWorkDetails(workId, workName, workDuration);
