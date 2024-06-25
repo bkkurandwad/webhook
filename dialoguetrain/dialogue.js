@@ -34,7 +34,7 @@ async function createIntent() {
 ***REMOVED***];
 
     const intent = {
-        displayName: 'AddWorkDetailsbyHR',
+        displayName: 'AddWorkDetailsHR',
         trainingPhrases: trainingPhrases,
         messages: messages,
         webhookState: 'WEBHOOK_STATE_ENABLED',
