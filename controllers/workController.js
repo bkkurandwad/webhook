@@ -1,5 +1,7 @@
 // controllers/workController.js
 const express = require('express');
+const path = require('path');
+const fs = require('fs');
 
 //db
 const Emp = require('../models/userdetails')
@@ -10,6 +12,7 @@ const { calculateReminderTime } = require('../utils/dateUtils');
 //services
 const { generateAudioFromText } = require('../services/textToSpeechService');
 const { sendNotification } = require('../services/fcmService');
+const { sendMail } = require('../services/mail');
 
 const router = express.Router();
 
@@ -34,18 +37,14 @@ router.post('/reg', async (req, res) => {
 ***REMOVED***);
     const savedWork = await workDetails.save();
     res.status(201).json(savedWork);
+    notify_for_work(eid,wt, wd, savedWork);
   } catch (error) {
     console.error('Error registering work:', error);
     res.status(500).json({ error: error.message });
   }
-
-    notify_for_work(eid,wt, wd);
-    
-
-    
 });
 
-async function notify_for_work(assigned_to,work_title, msg) {
+async function notify_for_work(assigned_to,work_title, msg, workDetails) {
   //const reminderTime = calculateReminderTime(startTime);
 // Fetch token from database using assigned_to (emp_id)
 const employee = await Emp.findOne({ emp_id: assigned_to });
@@ -56,13 +55,42 @@ if (!employee) {
 
     const token = employee.emp_token; // Assuming emp_token is the field in your model
     const name = employee.emp_name;
+    const mail = employee.emp_emailid;
+    const sub = `Work Update for ${name}`;
     console.log(token);
     const reminderMessage = `Hi ${name}, I just called you to inform about the work "${work_title}" starting in 30 minutes. ${msg}. Please be prepared.`;
    const  audioC = await generateAudioFromText(reminderMessage);
+   await notify_through_mail(mail, sub, workDetails);
     await sendNotification(token, work_title, msg);
 }
 
+async function notify_through_mail(mail, sub, work_det){
+  // Read the HTML template
+const emailTemplate = fs.readFileSync(path.join(__dirname, 'emailtemp.html'), 'utf-8');
 
+const { work_id, work_title, work_description, assigned_to, assigned_by, start_time, end_time, due_date } = work_det;
+
+// Substitute placeholders with actual values
+const emailContent = emailTemplate
+  .replace('{{work_id}}', work_id)
+  .replace('{{work_title}}', work_title)
+  .replace('{{work_description}}', work_description)
+  .replace('{{assigned_to}}', assigned_to)
+  .replace('{{assigned_by}}', assigned_by)
+  .replace('{{start_time}}', start_time)
+  .replace('{{end_time}}', end_time)
+  .replace('{{due_date}}', due_date);
+
+  const mailOptions = {
+    from : 'bhargavkurandwad@gmail.com',
+    to : mail,
+    subject : sub,
+    text : 'ntg',
+    html : emailContent
+  };
+
+  await sendMail(mailOptions);
+}
 
 
 async function notify_for_announcements(work_title, work_msg, hr_name) {

@@ -2,6 +2,7 @@ const { calculateReminderTime } = require('../utils/dateUtils');
 const Work = require('../models/Work');
 const { generateAudioFromText } = require('../services/textToSpeechService');
 const { sendNotification } = require('../services/fcmService');
+const { sendMail } = require('../services/mail');
 
 // Function to register a new work assignment
 async function registerWork(req, res) {
@@ -31,6 +32,7 @@ async function registerWork(req, res) {
 
     // Generate audio from text message
     const reminderMessage = `You have a work assignment "${work_title}" starting in 30 minutes. Please be prepared.`;
+    
     const audioFilePath = await generateAudioFromText(reminderMessage);
 
     // Schedule the notification using a task scheduler (e.g., setTimeout)
