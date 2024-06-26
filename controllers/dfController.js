@@ -85,14 +85,12 @@ res.send({
 ***REMOVED***);
 ***REMOVED*** else {
       // Format the work details into a readable string
-      let workDetails = 'Here are your assigned works:\n';
-      works.forEach(work => {
-        workDetails += `- ${work.title} (Due: ${work.due_date})\n`;
-***REMOVED***);
+      const limitedWorks = works.slice(0, 5);
 
-      // Send the formatted string as the response
-      res.send({
-        fulfillmentText: workDetails
+      // Format the work details into a readable string
+      let workDetails = 'Here are your assigned works:\n';
+      limitedWorks.forEach(work => {
+        workDetails += `- ${work.title} (Due: ${work.due_date})\n`;
 ***REMOVED***);
 ***REMOVED***
   } catch (error) {
