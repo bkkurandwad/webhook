@@ -24,7 +24,7 @@ async function generateAudioFromText(text) {
    
 try {
   const [res] = await client.synthesizeSpeech(requestBody);
-    const audioFilePath = 'call3.mp3'; // Specify your file path to save audio
+    const audioFilePath = 'call.mp3'; // Specify your file path to save audio
     const writeFile = util.promisify(fs.writeFile);
          await writeFile(audioFilePath, res.audioContent, 'binary');
          //const base64String = Buffer.from(res.audioContent, 'binary').toString('base64');
