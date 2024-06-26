@@ -70,12 +70,40 @@ res.send({
               fulfillmentText: `Work Title: ${work_title} has been added successfully.`
   ***REMOVED***);
 ***REMOVED*** break;
-      case 'work':
-        const workmsg = await insert("new work", "work@workmail.com");
-        res.send({
-          fulfillmentText: workmsg
+      case 'getworkdetails':
+  try {
+    // Retrieve the employee ID from the request
+    const employ = req.body.queryResult.parameters.emp_id;
+
+    // Fetch work details assigned to the specified employee
+    const works = await Work.findMany({ assigned_to: employ });
+
+    // Check if any work details are found
+    if (!works || works.length === 0) {
+      res.send({
+        fulfillmentText: 'You don\'t have any work assigned.'
 ***REMOVED***);
-        break;
+***REMOVED*** else {
+      // Format the work details into a readable string
+      let workDetails = 'Here are your assigned works:\n';
+      works.forEach(work => {
+        workDetails += `- ${work.title} (Due: ${work.due_date})\n`;
+***REMOVED***);
+
+      // Send the formatted string as the response
+      res.send({
+        fulfillmentText: workDetails
+***REMOVED***);
+***REMOVED***
+  } catch (error) {
+    // Handle any errors that occur during the process
+    console.error('Error fetching work details:', error);
+    res.send({
+      fulfillmentText: 'An error occurred while fetching work details.'
+***REMOVED***);
+  }
+  break;
+
       default:
         res.send({
           fulfillmentText: 'Simple response from webhook.'
