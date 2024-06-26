@@ -76,7 +76,7 @@ res.send({
     const employ = req.body.queryResult.parameters.emp_id;
 
     // Fetch work details assigned to the specified employee
-    const works = await Work.findMany({ assigned_to: employ });
+    const works = await Work.find({ assigned_to: employ });
 
     // Check if any work details are found
     if (!works || works.length === 0) {
