@@ -1,6 +1,7 @@
 // external packages
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 
 // internal packages
 const bodyParser = require('body-parser'); // Middleware to parse incoming request bodies
@@ -17,6 +18,7 @@ require('dotenv').config();
 // Start the webapp
 const webApp = express();
 
+webApp.use(cors());
 webApp.use(bodyParser.json());
 
 // Webapp settings
