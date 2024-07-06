@@ -2,12 +2,11 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
 
 //db
 const Emp = require('../models/userdetails')
 const Work = require('../models/workdetails');
-
-const { calculateReminderTime } = require('../utils/dateUtils');
 
 //services
 const { generateAudioFromText } = require('../services/textToSpeechService');
@@ -57,8 +56,7 @@ if (!employee) {
     const name = employee.emp_name;
     const mail = employee.emp_emailid;
     const sub = `Work Update for ${name}`;
-    console.log(token);
-    const reminderMessage = `Hi ${name}, I just called you to inform about the work "${work_title}" starting in 30 minutes. ${msg}. Please be prepared.`;
+    const reminderMessage = `Hi ${name}, I just called you to inform about the work "${work_title}". ${msg}. Please be prepared.`;
    const  audioC = await generateAudioFromText(reminderMessage);
    await notify_through_mail(mail, sub, workDetails);
     await sendNotification(token, work_title, msg);
@@ -82,7 +80,7 @@ const emailContent = emailTemplate
   .replace('{{due_date}}', due_date);
 
   const mailOptions = {
-    from : 'bhargavkurandwad@gmail.com',
+    from : process.env.EMAIL_FROM_USER,
     to : mail,
     subject : sub,
     text : 'ntg',

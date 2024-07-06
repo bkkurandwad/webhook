@@ -4,10 +4,8 @@ require('dotenv').config();
 
 async function connectToMongoDB() {
   try {
-    await mongoose.connect("mongodb+srv://bhargavkurandwad:q2Rz53OVvSkI3WmD@cluster0.qb3qmjd.mongodb.net/DIALOGUEFLOW?retryWrites=true&w=majority&appName=Cluster", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      socketTimeoutMS: 35000 // set socket timeout to 35 seconds
+    await mongoose.connect(process.env.MONGO_URI, {
+      socketTimeoutMS: 30000 
 ***REMOVED***);
     console.log('Connected to MongoDB successfully!');
   } catch (err) {

@@ -2,14 +2,10 @@ const textToSpeech = require('@google-cloud/text-to-speech');
 const util = require('util');
 const fs = require('fs');
 const path = require('path');
-
 require('dotenv').config();
 
-process.env.GOOGLE_APPLICATION_CREDENTIALS = path.resolve(__dirname, '../dialogue-a08df-33ec38611656.json');
+process.env.GOOGLE_APPLICATION_CREDENTIALS = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
-console.log('GOOGLE_APPLICATION_CREDENTIALS:', process.env.GOOGLE_APPLICATION_CREDENTIALS);
-
-require('dotenv').config();
 
 // Initialize the Text-to-Speech API client
 const client = new textToSpeech.TextToSpeechClient();

@@ -1,12 +1,7 @@
-
-console.log('GOOGLE_APPLICATION_CREDENTIALS:', process.env.GOOGLE_APPLICATION_CREDENTIALS);
-
 require('dotenv').config();
 
 const dialogflow = require('@google-cloud/dialogflow');
-const uuid = require('uuid');
-
-const projectId = 'dialogue-a08df';
+const projectId = process.env.proj_id;
 const intentsClient = new dialogflow.IntentsClient();
 
 async function createIntent() {

@@ -56,6 +56,30 @@ webApp.get('/call' , (req, res) => {
   });
 });
 
+let messages = [];
+
+webApp.post('/api/msg/send', (req, res) => {
+  const { message } = req.body;
+
+  if (!message) {
+    return res.status(400).json({ error: 'Message is required' });
+  }
+
+  const newMessage = {
+    id: messages.length + 1,
+    message,
+    timestamp: new Date().toISOString(),
+  };
+
+  messages.push(newMessage);
+  res.status(201).json(newMessage);
+});
+
+// Endpoint to receive messages
+webApp.get('/api/msg/rec', (req, res) => {
+  res.json(messages);
+});
+
 async function insert(emailid, token){
   try {
     await User.create({
